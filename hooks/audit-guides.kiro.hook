@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Audit Guides",
+  "description": "On-demand audit of .kiro agent guides and steering files against current official documentation for key dependencies (Next.js, React, Tailwind, Bun, Biome, gRPC/Connect). Checks for deprecated patterns, outdated APIs, and stale recommendations.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Audit all guide and steering files in .kiro/ for outdated recommendations. For each guide: 1) Read the guide content, 2) Identify any library/framework-specific recommendations, 3) Use web search to check the latest official docs for those libraries, 4) Flag any mismatches between what the guide says and what current docs recommend. Focus on: Next.js, React, Tailwind CSS, Bun, Biome, gRPC/Connect, Jotai, React Flow. Present findings as a list of proposed changes with source URLs. Do not edit any files — only report findings and wait for approval."
+  }
+}

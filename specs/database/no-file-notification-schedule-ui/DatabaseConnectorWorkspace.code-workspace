@@ -1,0 +1,22 @@
+{
+    "folders": [
+        {
+            "path": "../../../.."
+        },
+        {
+            "path": "../../../../../Ubiquity-Connectors-Prefect"
+        },
+        {
+            "path": "../../../../../QT-Ubi-UbiquityBackend"
+        },
+        {
+            "path": "../../../../../Ubiquity-Diagram"
+        },
+        {
+            "path": "../../../../../ubiquity-protos"
+        }
+    ],
+    "settings": {
+        "typescript.autoClosingTags": false
+    }
+}

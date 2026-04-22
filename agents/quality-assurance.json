@@ -1,0 +1,15 @@
+{
+  "name": "quality-assurance",
+  "description": "Critical code reviewer. Challenges assumptions, finds edge cases, advocates for simplicity. Use before or after coding.",
+  "prompt": "file://./quality-assurance.md",
+  "tools": ["read", "write", "code", "grep", "glob"],
+  "allowedTools": ["read", "code", "grep", "glob"],
+  "resources": [
+    "skill://.kiro/guides/quality-assurance/code-review.md",
+    "skill://.kiro/guides/quality-assurance/test-review.md",
+    "skill://.kiro/guides/quality-assurance/design-review.md",
+    "file://.kiro/journal/JOURNAL_RULES.md"
+  ],
+  "keyboardShortcut": "ctrl+q",
+  "welcomeMessage": "QA agent ready. What needs reviewing?"
+}

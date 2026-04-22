@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Worktree Strategy Checkpoint",
+  "description": "After a tasks.md file is created in a spec folder, reminds the agent to evaluate the parallel worktree strategy condition from agent-workflow.md",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "**/.kiro/specs/*/tasks.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A tasks.md file was just created. You MUST now evaluate the parallel worktree strategy checkpoint from agent-workflow.md: Does this feature have 5+ tasks touching different files/domains? If YES, read .kiro/guides/workflow/parallel-worktree-strategy.md and produce a worktree-plan.md. If NO, state \"Worktree strategy evaluated — not applicable (reason).\" Do NOT skip this step."
+  }
+}

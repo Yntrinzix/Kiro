@@ -1,0 +1,18 @@
+# Kiro-managed internals
+argv.json
+extensions/
+powers/
+
+# Secrets / tokens
+settings/
+
+# Archived / deprecated
+old/
+steering-temp/
+
+# Session knowledge (auto-generated, noisy)
+knowledge/sessions/
+
+# Synthesis/upskill timestamps (auto-updated)
+knowledge/last-synthesis.md
+knowledge/last-upskill.md

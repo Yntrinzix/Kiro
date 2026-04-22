@@ -1,0 +1,14 @@
+{
+  "name": "ticket-triage",
+  "description": "Ticket readiness gatekeeper. Analyzes work items for blockers, missing info, and dependency readiness before planning begins.",
+  "prompt": "file://./ticket-triage.md",
+  "tools": ["read", "grep", "glob", "web_fetch"],
+  "allowedTools": ["read", "grep", "glob"],
+  "includeMcpJson": true,
+  "resources": [
+    "skill://.kiro/guides/ticket-triage/readiness-checklist.md",
+    "file://.kiro/steering/ubiquity-architecture.md"
+  ],
+  "keyboardShortcut": "ctrl+t",
+  "welcomeMessage": "Ticket triage agent ready. Drop a ticket link or paste the task details."
+}

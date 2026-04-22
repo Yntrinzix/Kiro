@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "name": "Self-Correction & Code Optimization Review",
+  "description": "If improvements are found, apply them immediately. If the code is already optimal, provide a brief 'Self-Review Passed' justification.",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before finalizing this task, perform a rigorous self-review of the code you just generated. Do not submit the PR until you have addressed the following:\n\nCode Elegance: Is there a cleaner, more readable way to implement this logic? Refactor any 'spaghetti' code or overly complex conditionals.\n\nTechnical Debt: Identify and perform any necessary cleanup (e.g., removing console.log statements, temporary comments, or 'TODOs').\n\nPerformance: Is this the most optimized approach? Check for redundant loops, inefficient data structures, or unnecessary API calls.\n\nDependency Audit: Scan the imports/requirements. Remove any unused packages or libraries that were added during the trial-and-error phase."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Guide Evolution After PR Review",
+  "version": "1.0.0",
+  "description": "After reading PR review comments, check if any feedback should trigger a guide update",
+  "when": {
+    "type": "postToolUse",
+    "toolTypes": [".*get_pull_request_comments.*", ".*get_pull_request_reviews.*"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "PR review feedback was just read. Check: does any comment flag a convention, pattern, or approach that isn't documented in the guides? If yes, propose a guide update immediately. Also check: should the backend/frontend implementation guide's pre-implementation checklist have caught this?"
+  }
+}

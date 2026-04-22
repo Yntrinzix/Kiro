@@ -1,0 +1,15 @@
+{
+  "name": "protobuf-engineer",
+  "description": "Protobuf and Buf tooling specialist. Proto schema design, protovalidate, codegen, breaking change detection, schema evolution.",
+  "prompt": "file://./protobuf-engineer.md",
+  "tools": ["read", "write", "shell", "code", "grep", "glob"],
+  "allowedTools": ["read", "grep", "glob", "code"],
+  "resources": [
+    "skill://.kiro/guides/protobuf-engineer/schema-design.md",
+    "skill://.kiro/guides/protobuf-engineer/buf-tooling.md",
+    "skill://.kiro/guides/protobuf-engineer/schema-evolution.md",
+    "file://.kiro/journal/JOURNAL_RULES.md"
+  ],
+  "keyboardShortcut": "ctrl+p",
+  "welcomeMessage": "Protobuf engineer ready. What schema work is needed?"
+}
