@@ -54,6 +54,18 @@ Write `.kiro/specs/{feature}/.config.kiro`:
 
 "Setup complete. Open `../{repo}-worktrees/{feature-name}/local` in Kiro and start coding. When ready to ship, use Phase 3."
 
+## Step 6: Copy .env Files
+
+`.env` files are gitignored and won't exist in new worktrees. Copy them from the main repo:
+
+```bash
+# For WebApps monorepo — copy all app .env files
+cp {main-repo}/monorepo/apps/database/.env ../{repo}-worktrees/{feature-name}/local/monorepo/apps/database/.env
+cp {main-repo}/monorepo/apps/journey-builder/.env ../{repo}-worktrees/{feature-name}/local/monorepo/apps/journey-builder/.env
+```
+
+Check `apps/*/.env.template` for which apps need `.env` files. Without them, the app falls back to placeholder defaults and fails at runtime with DNS errors.
+
 ## Gate: Before Proceeding
 
 - [ ] Base branch created and pushed
@@ -61,5 +73,6 @@ Write `.kiro/specs/{feature}/.config.kiro`:
 - [ ] PR worktrees created (review targets)
 - [ ] .kiro symlinked into all worktrees
 - [ ] .config.kiro written
+- [ ] .env files copied to worktree apps
 
 **Next:** `.kiro/guides/workflow/worktree-3-execute.md`

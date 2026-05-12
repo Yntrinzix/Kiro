@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Block --no-verify",
+  "description": "Prevents using --no-verify as a first resort. If hooks fail, diagnose the root cause instead of bypassing.",
+  "version": "1",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": [
+      "shell"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "ENFORCEMENT GATE: If the shell command about to execute contains '--no-verify', STOP. Do NOT proceed. Instead: diagnose WHY the hook is failing (missing deps, wrong env, broken config) and fix the root cause. --no-verify masks real problems. Only use it if the user explicitly orders it after you've explained the risk. If the command does not contain --no-verify, ignore this check."
+  }
+}

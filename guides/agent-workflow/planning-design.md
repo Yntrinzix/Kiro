@@ -46,9 +46,14 @@ Only proceed past this step on ✅ or user-approved ⚠️.
 
 ---
 
-1. **@architect** produces the document (requirements, design, or both)
-2. **Figma Structural Diff (when Figma link exists)**  before finalizing the design, use the Figma MCP to fetch the relevant screens and compare the layout structure (sections, field groupings, field order) against the current code. Flag any fields that moved between sections, sections that were added/removed, or layout changes not mentioned in the ticket. These become separate tasks in the implementation plan. If no Figma link is provided, skip this step.
-3. **Acceptance Criteria Validation (MANDATORY)** — before proceeding, cross-check the produced document against the ticket's acceptance criteria:
+1. **Stack Assessment (MANDATORY first output from @architect)**
+   - Q: Does this project have an existing codebase with established tech stack?
+   - If YES → document "Stack: [existing tech]" and proceed to architecture
+   - If NO → @architect produces a Stack Proposal (evaluate 2-3 options per core challenge, recommend a cohesive stack, include "Why not X" for rejected alternatives) BEFORE architecture
+   - The architecture section MUST reference the stack decision
+2. **@architect** produces the document (requirements, design, or both)
+3. **Figma Structural Diff (when Figma link exists)**  before finalizing the design, use the Figma MCP to fetch the relevant screens and compare the layout structure (sections, field groupings, field order) against the current code. Flag any fields that moved between sections, sections that were added/removed, or layout changes not mentioned in the ticket. These become separate tasks in the implementation plan. If no Figma link is provided, skip this step.
+4. **Acceptance Criteria Validation (MANDATORY)** — before proceeding, cross-check the produced document against the ticket's acceptance criteria:
    - Extract every acceptance criterion from the PBI/ticket (fetched in Step 0)
    - For each AC, verify it is explicitly addressed in the requirements or design doc
    - Produce a coverage matrix:
@@ -60,20 +65,26 @@ Only proceed past this step on ✅ or user-approved ⚠️.
      ```
    - If ANY gaps exist: @architect must revise the document to address them before continuing
    - Only proceed when all ACs show ✅ Covered
-4. **Dependency impact analysis (MANDATORY)** — before finalizing design, identify which repos/components are affected. Read `/mnt/c/Users/T828819/.kiro/steering/ubiquity-architecture.md` for the dependency graph, then:
+5. **Dependency impact analysis (MANDATORY)** — before finalizing design, identify which repos/components are affected. Read `/mnt/c/Users/T828819/.kiro/steering/ubiquity-architecture.md` for the dependency graph, then:
    - List all repos that consume or are consumed by the components being changed
    - For each downstream consumer: what breaks, what needs regeneration
    - Include cross-repo impact in the design doc so tasks account for it
    - If the feature touches protos: explicitly plan regeneration steps for WebApps and Backend
-5. **@dark-architect debate (3 rounds)** — the design goes through adversarial review:
+6. **@dark-architect debate (3 rounds)** — the design goes through adversarial review:
    - **Round 1**: @dark-architect critiques the design — structural flaws, wrong trade-offs, missed alternatives, scalability/failure risks
    - **Round 2**: @architect responds to the critique. @dark-architect accepts strong rebuttals, pushes back on weak ones, raises any new concerns
    - **Round 3**: @dark-architect produces a final assessment — resolved concerns and open design risks. The design goes to the user after this round regardless of outcome
-6. Present the design + debate outcome to the user for review
+7. **@skill-auditor gate (MANDATORY)** — read `.kiro/guides/agent-workflow/skill-audit.md` and execute:
+   - Extract every technology/library/API/pattern from the design
+   - Check /skills/ and /guides/ for coverage
+   - Produce gap table (always — even if all ✅)
+   - Append gap table to design presentation
+   - Skip only if: bug fix workflow, or task touches ≤3 files with no new technology
+8. Present the design + debate outcome to the user for review
    - If there are **Open Design Risks** from the debate, present them clearly so the user can make the call
-7. Iterate based on user feedback
-8. Only proceed to the next phase when the user approves
-9. **Task breakdown (delegate to @taskmaster)** — once the user approves the design, spawn @taskmaster to decompose the design into executable tasks (`tasks.md`). The architect does NOT do task breakdown directly.
+9. Iterate based on user feedback
+10. Only proceed to the next phase when the user approves
+11. **Task breakdown (delegate to @taskmaster)** — once the user approves the design, spawn @taskmaster to decompose the design into executable tasks (`tasks.md`). The architect does NOT do task breakdown directly.
 
 ## Rules
 

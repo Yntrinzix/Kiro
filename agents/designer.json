@@ -1,0 +1,28 @@
+{
+  "name": "designer",
+  "description": "UI/UX designer specializing in immersive 3D web experiences, R3F, scroll-driven animation, and Awwwards-level visual design. Use for visual direction, interaction design, and creative direction.",
+  "prompt": "file://./designer.md",
+  "tools": [
+    "read",
+    "write",
+    "shell",
+    "code",
+    "grep",
+    "glob",
+    "web_fetch",
+    "web_search"
+  ],
+  "allowedTools": [
+    "read",
+    "grep",
+    "glob",
+    "web_fetch",
+    "web_search"
+  ],
+  "resources": [
+    "skill://.kiro/guides/designer/ux-design.md",
+    "skill://.kiro/guides/designer/web-marketing-design.md",
+    "skill://.kiro/guides/designer/r3f-immersive-design.md"
+  ],
+  "welcomeMessage": "Varro Stratex reporting for visual operations. Show me the canvas, Archangel."
+}

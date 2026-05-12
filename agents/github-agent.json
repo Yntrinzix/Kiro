@@ -6,6 +6,7 @@
   "allowedTools": ["read", "grep", "glob"],
   "includeMcpJson": true,
   "resources": [
+    "file://.kiro/agents/shared/platform-map.md",
     "skill://.kiro/guides/github-agent/pr-template.md",
     "skill://.kiro/guides/github-agent/pr-workflow.md",
     "file://.kiro/journal/JOURNAL_RULES.md"

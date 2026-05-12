@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Post-Push Retrospective Trigger",
+  "description": "After any git push, fires the mandatory retrospective. The trigger is mechanical — the retro content is adaptive (what went well, what could improve, guide updates needed).",
+  "version": "1",
+  "when": {
+    "type": "postToolUse",
+    "toolTypes": [
+      "shell"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "If the shell command that just executed was a `git push`, you MUST now perform the post-push retrospective BEFORE any other work. Do not skip or defer. Respond with:\n1. What went well — did we follow guides? Was the approach clean?\n2. What could be better — friction points, improvisation where a guide should exist?\n3. Guide updates needed? — propose any steering/guide/knowledge changes\n4. Knowledge discoveries — anything non-obvious about the codebase worth capturing?\nKeep it to 2-4 bullets max. If the command was not git push, ignore this."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Pre-Commit Staged Content Verification",
+  "description": "Before any git commit, forces a git diff --staged check to verify file content is actually present. Prevents committing empty files or missing content that buffered tool reads might miss.",
+  "version": "1",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": [
+      "shell"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "GATE CHECK: If the shell command about to execute contains 'git commit', you MUST first run `git diff --staged` and verify that the staged content is non-empty and matches what you expect. Do NOT trust prior file reads — verify what git will actually commit. If the command is not a git commit, ignore this check."
+  }
+}

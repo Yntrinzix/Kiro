@@ -22,21 +22,15 @@ When squash merging a PR on GitHub, always:
 
 ## Pre-Commit Verification
 
-Before every `git commit`, run `git diff --staged` to verify file content is actually present. Don't trust tool reads  verify what git will actually commit. Empty files or missing content won't be caught by `readFile` or `getDiagnostics` if they read from a buffered state.
+**Enforced by hook:** `pre-commit-verify-staged.kiro.hook`
+
+Why: Tool reads can return buffered state that differs from what git will actually commit. Always verify staged content is real.
 
 ## Post-Push Retrospective
 
-**MANDATORY** - fires immediately after git push, before ANY other work (user summary, next task). Do NOT skip or defer. The retrospective is the first thing after push output.
+**Enforced by hook:** `post-push-retro-trigger.kiro.hook`
 
-After every `git push`, the agent MUST do a brief self-assessment:
-
-1. **What went well** — Did we follow the guides? Was the approach clean?
-2. **What could be better** — Did we hit any friction? Did we improvise where a guide should exist?
-3. **Guide updates needed?** — Propose any updates to steering, guides, or knowledge base entries
-4. **Knowledge discoveries** — Did we learn anything non-obvious about the codebase worth adding to `.kiro/knowledge/`?
-
-Keep it short — 2-4 bullet points max. This is a quick pulse check, not a full report.
-Wait for user approval before making any changes to guides/knowledge.
+Why: Retrospectives after push catch guide gaps, friction points, and knowledge discoveries while context is fresh. The hook guarantees it fires before any other work.
 
 ## Worktree Setup
 
@@ -46,7 +40,18 @@ repo's package manager install) before any git operations. Git hooks
 
 ## Don't Do This
 
-- **Don't use `--no-verify` as a first resort.** If hooks fail,
+- **Don't use `--no-verify` as a first resort.** *(Enforced by `block-no-verify.kiro.hook`)* If hooks fail,
   diagnose why (missing deps, wrong env, broken config) and fix the
   root cause. `--no-verify` masks real problems.
 - **Don't push multi-commit PRs when the base is a merge commit.** The commitlint CI uses a shallow clone (`fetch-depth: commits + 1`) that can't resolve the base SHA when it's a merge commit at the boundary. Squash to 1 commit on a fresh branch off the base. This is a known `unit-tests.yml` fragility  real fix is `fetch-depth: 0` but that needs a separate CI PR.
+
+## No Dead Code, No Placeholders, No Temporary Content
+
+Every line committed must serve a purpose. Do NOT commit:
+- Dead code (unused imports, unreachable branches, commented-out blocks)
+- Placeholder files (dummy tests, empty implementations, stub-only files)
+- TODO-only code with no real logic
+- Temporary scaffolding that exists only to "make the folder exist"
+- Empty files or directories used as placeholders
+
+This applies globally — source code, tests, configs, everything. If it doesn't do something real, it doesn't get committed. Create files when they have real content, not before.

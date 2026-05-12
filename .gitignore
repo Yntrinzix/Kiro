@@ -16,3 +16,12 @@ knowledge/sessions/
 # Synthesis/upskill timestamps (auto-updated)
 knowledge/last-synthesis.md
 knowledge/last-upskill.md
+
+# CLI sessions (auto-generated, may contain secrets)
+sessions/
+.cli_bash_history
+
+# SQLite database (binary, local-only)
+kiro-memory.db
+kiro-memory.db-shm
+kiro-memory.db-wal

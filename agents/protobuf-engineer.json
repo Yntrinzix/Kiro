@@ -5,6 +5,7 @@
   "tools": ["read", "write", "shell", "code", "grep", "glob"],
   "allowedTools": ["read", "grep", "glob", "code"],
   "resources": [
+    "file://.kiro/agents/shared/platform-map.md",
     "skill://.kiro/guides/protobuf-engineer/schema-design.md",
     "skill://.kiro/guides/protobuf-engineer/buf-tooling.md",
     "skill://.kiro/guides/protobuf-engineer/schema-evolution.md",

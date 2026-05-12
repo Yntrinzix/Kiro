@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Knowledge Frontmatter Sync",
+  "description": "After editing a knowledge file that has sync: published, automatically flips it to sync: modified and updates lastLocalEdit.",
+  "version": "1",
+  "when": {
+    "type": "postToolUse",
+    "toolTypes": [
+      "write"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "If the file just written matches `.kiro/knowledge/*.md` or `.kiro/knowledge/sessions/*.md`, check its frontmatter. If `sync: published` is present, you MUST flip it to `sync: modified` and set `lastLocalEdit` to the current ISO timestamp. This is mandatory — published files that are edited locally must be marked modified for the sync system to detect changes. If the file is not a knowledge file, or sync is already 'draft' or 'modified', ignore this."
+  }
+}

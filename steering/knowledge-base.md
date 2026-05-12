@@ -40,11 +40,31 @@ lastPublished: (ISO timestamp)
 Rules:
 - New file: set `sync: draft`
 - After publish: set `sync: published` and `lastPublished` to now
-- After editing a `published` file: flip to `sync: modified` and update `lastLocalEdit`
+- After editing a `published` file: flip to `sync: modified` and update `lastLocalEdit` *(enforced by `knowledge-frontmatter-sync.kiro.hook`)*
 - The `sync check` script handles publishing and setting `published` + `lastPublished`
 - Never manually set `sync: published` — let the script do it
 
+## File Organization
+
+Knowledge files are organized into project-scoped and cross-project directories:
+
+```
+knowledge/
+├── projects/{project-name}/   ← project-specific discoveries
+├── workflow/                   ← cross-project workflow patterns
+├── sessions/                   ← session continuity notes
+├── parked-ideas/               ← deferred concepts
+└── (root)                      ← meta files only (last-*, notion-database-id, auto-learned, README)
+```
+
+Rules:
+- Every new knowledge file MUST go into the correct `projects/{project}/` or `workflow/` folder — never floating at root
+- Root-level files are reserved for meta/index files only
+- Within each folder, files are sorted alphabetically by filename
+- When creating a new project folder, add it alphabetically among siblings
+- Filenames use kebab-case: `{repo-or-domain}-{topic}.md`
+
 ## Format
 
-- Filename: `{repo}-{topic}.md` — short, factual, no fluff
+- Filename: `{repo-or-domain}-{topic}.md` — short, factual, no fluff
 - The README.md index is optional. The knowledge base is vector-indexed and searchable without it

@@ -20,6 +20,7 @@
     "code"
   ],
   "resources": [
+    "file://.kiro/agents/shared/platform-map.md",
     "skill://.kiro/guides/frontend/typescript-best-practices.md",
     "skill://.kiro/guides/frontend/react-patterns.md",
     "skill://.kiro/guides/frontend/nextjs-conventions.md",

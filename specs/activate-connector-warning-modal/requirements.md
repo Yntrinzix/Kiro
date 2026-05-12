@@ -1,5 +1,6 @@
 ---
-status: draft
+status: updated
+lastUpdated: 2026-05-05
 approvedBy:
 approvedDate:
 ---
@@ -72,7 +73,7 @@ When a user toggles a connector to "Active" on the Connectors management page, a
 
 1. WHEN the user clicks the enabled "Activate Connector" button, THE Warning_Modal SHALL close.
 2. WHEN the user clicks the enabled "Activate Connector" button, THE Warning_Modal SHALL invoke the toggle activation mutation with `active: true` for the selected connector.
-3. WHEN the toggle activation mutation succeeds, THE Billing_Module SHALL receive a signal containing the connector ID and the Connector_Cost to initiate the 1-month charge.
+3. WHEN the toggle activation mutation succeeds, THE Billing_Module SHALL receive a signal (sent server-side by the Connectors backend via SQS) containing the connector ID to initiate the 1-month charge. THE frontend SHALL NOT send a separate billing signal.
 4. IF the toggle activation mutation fails, THEN THE Warning_Modal SHALL display an error message and THE Toggle_Switch SHALL remain in the inactive position.
 
 ---
@@ -87,3 +88,16 @@ When a user toggles a connector to "Active" on the Connectors management page, a
 2. WHEN the toggle activation mutation succeeds after Warning_Modal confirmation, THE Connector SHALL display the "Next Run" scheduled time in the connector list row.
 3. WHILE the toggle activation mutation is pending after Warning_Modal confirmation, THE Toggle_Switch SHALL be disabled to prevent duplicate submissions.
 4. IF the toggle activation mutation fails after Warning_Modal confirmation, THEN THE Connector status SHALL remain inactive and THE Toggle_Switch SHALL remain in the inactive position.
+
+---
+
+### Requirement 6: Price Loading States
+
+**User Story:** As a user, I want the modal to handle pricing data gracefully, so that I am never left in an ambiguous state.
+
+#### Acceptance Criteria
+
+1. WHILE the Connector_Cost is being fetched, THE Warning_Modal SHALL display a loading indicator in place of the billing copy.
+2. WHILE the Connector_Cost is being fetched, THE "Activate Connector" button SHALL remain disabled.
+3. IF the Connector_Cost fetch fails, THE Warning_Modal SHALL display a generic error message and THE "Activate Connector" button SHALL remain disabled.
+4. THE Warning_Modal SHALL NOT allow activation to proceed without a successfully resolved Connector_Cost.

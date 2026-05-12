@@ -12,6 +12,7 @@
     "read"
   ],
   "resources": [
+    "file://.kiro/agents/shared/platform-map.md",
     "skill://.kiro/guides/tester/testing-philosophy.md",
     "skill://.kiro/guides/tester/test-patterns.md",
     "skill://.kiro/guides/tester/strategic-critiques.md",

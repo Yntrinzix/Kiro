@@ -5,6 +5,7 @@
   "tools": ["read", "write", "code", "grep", "glob"],
   "allowedTools": ["read", "code", "grep", "glob"],
   "resources": [
+    "file://.kiro/agents/shared/platform-map.md",
     "skill://.kiro/guides/quality-assurance/code-review.md",
     "skill://.kiro/guides/quality-assurance/test-review.md",
     "skill://.kiro/guides/quality-assurance/design-review.md",

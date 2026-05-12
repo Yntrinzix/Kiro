@@ -1,13 +1,16 @@
 {
-  "version": "1.0.0",
   "enabled": true,
-  "name": "Self-Correction & Code Optimization Review",
-  "description": "If improvements are found, apply them immediately. If the code is already optimal, provide a brief 'Self-Review Passed' justification.",
+  "name": "Self-Correction Code Review",
+  "description": "After writing code, reviews for over-engineering, YAGNI violations, dead code, and stack-specific standards.",
+  "version": "1",
   "when": {
-    "type": "postTaskExecution"
+    "type": "postToolUse",
+    "toolTypes": [
+      "write"
+    ]
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Before finalizing this task, perform a rigorous self-review of the code you just generated. Do not submit the PR until you have addressed the following:\n\nCode Elegance: Is there a cleaner, more readable way to implement this logic? Refactor any 'spaghetti' code or overly complex conditionals.\n\nTechnical Debt: Identify and perform any necessary cleanup (e.g., removing console.log statements, temporary comments, or 'TODOs').\n\nPerformance: Is this the most optimized approach? Check for redundant loops, inefficient data structures, or unnecessary API calls.\n\nDependency Audit: Scan the imports/requirements. Remove any unused packages or libraries that were added during the trial-and-error phase."
+    "prompt": "Briefly review the file that was just written. ONLY if it contains new code (skip config, markdown, JSON, lock files), check for:\n\n1. YAGNI - features or abstractions not needed for the current task\n2. Over-engineering - unnecessary generics, excessive interfaces, premature abstraction, wrapper components that add no value\n3. Dead code - unused imports, unreachable branches, commented-out code, unused variables\n4. Missed edge cases - null/undefined, empty arrays, boundary conditions\n\nAdditionally, if the file is .ts/.tsx:\n5. TYPES: No `any` unless suppressed with biome-ignore comment and justification\n6. COMPONENTS: No prop drilling beyond 2 levels (use context or composition)\n7. HOOKS: Custom hooks must start with `use`, no side effects in render\n8. SERVER ACTIONS: Must have \"use server\" directive, input validation, error handling\n\nIf you find a clear issue, fix it silently. For minor suggestions, note them without changing the file. Skip silently if the code is clean and focused."
   }
 }

@@ -71,3 +71,23 @@ Only save on meaningful moments, not every message. Target 3-5 saves per session
 ## Storage
 
 `knowledge add` — vector-indexed (semantic search). Retrievable by topic, date, or any concept in the notes.
+
+## Specs — Source of Truth
+
+All specs live in the global `.kiro` folder, NOT in individual repos:
+
+```
+/mnt/c/Users/T828819/.kiro/specs/{feature-branch-name}/
+├── README.md          ← index (PBI link, quick reference)
+├── requirements.md    ← design, requirements, dependencies, ADRs
+├── tasks.md           ← task breakdown with file lists
+├── battle-plan.md     ← execution strategy (branches, PRs, phases)
+├── ui-design.md       ← visual design reference (if applicable)
+└── *.png              ← screenshots (if applicable)
+```
+
+**Naming convention:** `specs/{branch-name}/` — use the base feature branch name (e.g., `admin-billing-ui`, not the full `feature/admin-billing-ui`).
+
+**Why global:** Specs span multiple repos. Putting them in one repo makes them invisible from others. The global folder is accessible from any session (IDE or CLI).
+
+**Do NOT** put specs in repo-level `.kiro/specs/` folders. If they already exist there, they are stale copies — the global folder is the source of truth.

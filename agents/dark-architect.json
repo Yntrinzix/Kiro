@@ -5,6 +5,7 @@
   "tools": ["read", "write", "shell", "code", "grep", "glob", "web_fetch", "web_search"],
   "allowedTools": ["read", "grep", "glob", "code"],
   "resources": [
+    "file://.kiro/agents/shared/platform-map.md",
     "skill://.kiro/guides/architect/architecture-diagrams.md",
     "skill://.kiro/guides/architect/api-design-patterns.md",
     "skill://.kiro/guides/architect/decision-records.md",

@@ -6,8 +6,8 @@
   "allowedTools": ["read", "grep", "glob"],
   "includeMcpJson": true,
   "resources": [
-    "skill://.kiro/guides/ticket-triage/readiness-checklist.md",
-    "file://.kiro/steering/ubiquity-architecture.md"
+    "file://.kiro/agents/shared/platform-map.md",
+    "skill://.kiro/guides/ticket-triage/readiness-checklist.md"
   ],
   "keyboardShortcut": "ctrl+t",
   "welcomeMessage": "Ticket triage agent ready. Drop a ticket link or paste the task details."

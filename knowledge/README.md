@@ -10,24 +10,48 @@ MANDATORY: Do NOT read all knowledge entries. Only scan this table of contents.
 2. If a matching entry exists, read ONLY that file
 3. If no match, move on — don't waste context
 
+## Structure
+
+```
+knowledge/
+├── projects/ubiquity/   ← Ubiquity platform discoveries
+├── projects/zespri/     ← Zespri MCS discoveries
+├── workflow/            ← cross-project workflow patterns
+├── sessions/            ← session continuity notes
+├── parked-ideas/        ← deferred concepts
+└── (root)               ← meta files only
+```
+
 ## Index
 
-<!-- When adding a new entry, add a line here in the format: -->
-<!-- - `{filename}` — {one-line summary} | Tags: {repo}, {domain}, {topic} -->
+### projects/ubiquity/
 
-- `notion-database-id.md` — Notion Engineering Decisions database UUID for agent queries | Tags: notion, knowledge-base, database-id
+- `backend-connector-field-usage-api.md` — Backend connector field usage API patterns | Tags: QT-Ubi-UbiquityBackend, connectors, api
 - `backend-mvc-architecture.md` — Full MVC project architecture: controllers, infrastructure, routing, viewmodels, caching, auth, migration pattern | Tags: QT-Ubi-UbiquityBackend, mvc, architecture, legacy, strangler-fig
-- `ubiquity-backend-columninfo-no-ispk.md` — ColumnInfo has no IsPK property; key field detection only at DTE layer, MVC schema model update needed | Tags: QT-Ubi-UbiquityBackend, list, schema, columninfo, ispk
-- `notion-subpr-status-block-pattern.md` — Update existing Notion table blocks in place, don't append new ones during sub-PR status reconciliation | Tags: notion, worktree, sub-pr-status, gotcha
-- `ubiquity-dialog-escape-gotcha.md` — MVC jQuery gotchas: Escape keypress broken, <a> disabled class not preventing clicks, XSS via .html() string concat | Tags: QT-Ubi-UbiquityBackend, mvc, util, dialog, escape, xss, jquery, gotcha
 - `ubiquity-backend-build-order.md` — Build order for u3.sln: service DLLs must build before mvc project | Tags: QT-Ubi-UbiquityBackend, build, mvc, dependencies
+- `ubiquity-backend-columninfo-no-ispk.md` — ColumnInfo has no IsPK property; key field detection only at DTE layer | Tags: QT-Ubi-UbiquityBackend, list, schema, columninfo
 - `ubiquity-backend-namespace-services-collision.md` — Services namespace collides with Services.cs ViewModel class, causes CS0118 | Tags: QT-Ubi-UbiquityBackend, namespace, csharp, gotcha
 - `ubiquity-backend-worktree-file-overlap.md` — Parallel worktrees creating the same file causes merge conflicts | Tags: worktree, git, merge-conflict, gotcha
-- `worktree-distribute-from-local.md` — Distribute changes from local/feature branch to individual PR branches using selective stash checkout | Tags: worktree, git, distribute, workflow
+- `ubiquity-dialog-escape-gotcha.md` — MVC jQuery gotchas: Escape keypress broken, disabled class not preventing clicks, XSS via .html() | Tags: QT-Ubi-UbiquityBackend, mvc, jquery, gotcha
+- `webapps-check-origin-main-deps.md` — Always diff package.json against origin/main before committing | Tags: Ubiquity-WebApps, package-json, deps
+- `webapps-figma-check-layout-structure.md` — Check layout structure in Figma, not just styles | Tags: Ubiquity-WebApps, figma, ui, gotcha
+- `webapps-figma-structural-changes.md` — Figma designs may require structural changes beyond ticket scope | Tags: Ubiquity-WebApps, figma, scope, gotcha
+- `webapps-package-json-drift.md` — Package.json drift detection patterns | Tags: Ubiquity-WebApps, package-json, drift
+- `webapps-ui-test-framework-bun.md` — Test framework is bun:test, not Vitest | Tags: Ubiquity-WebApps, testing, bun
+
+### projects/zespri/
+
+_(Empty — pending Confluence access)_
+
+### workflow/
+
+- `hook-steering-split-rationale.md` — Steering = doctrine, Hooks = enforcement. The line between them. | Tags: steering, hooks, architecture
+- `notion-subpr-status-block-pattern.md` — Update existing Notion table blocks in place during sub-PR reconciliation | Tags: notion, worktree, sub-pr-status, gotcha
+- `worktree-distribute-from-local.md` — Distribute changes from local/feature branch to individual PR branches | Tags: worktree, git, distribute, workflow
 
 ## File Naming
 
-Each entry: `{repo}-{topic}.md` (e.g., `webapps-grpc-session-interceptor.md`)
+Each entry: `{repo-or-domain}-{topic}.md` (e.g., `webapps-grpc-session-interceptor.md`)
 
 ## What Belongs Here
 

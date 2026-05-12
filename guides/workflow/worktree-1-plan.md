@@ -21,20 +21,27 @@ Projects/
   {repo}-worktrees/
     {feature-name}/
       local/                                 <- ALL development here
-      shared-types/                          <- PR1 review target
-      list-controller/                       <- PR2 review target
-      detail-dialog/                         <- PR3 review target
+      scaffold/                              <- PR1 review target
+      data/                                  <- PR2 review target
+      components/                            <- PR3 review target
 ```
 
 ## Branch Naming
 
+Use flat branch names with dashes (no nested slashes — causes issues with some git tooling):
+
 ```
 {branch}                         <- base branch (from main)
-{branch}/shared-types            <- PR1: foundation
-{branch}/list-controller         <- PR2: parallel
-{branch}/detail-dialog           <- PR3: parallel
-{branch}/integration             <- PR4: wiring + tests (if needed)
+{branch}-scaffold                <- PR1: foundation
+{branch}-data                    <- PR2: parallel
+{branch}-components              <- PR3: parallel
+{branch}-integration             <- PR4: wiring + tests (if needed)
 ```
+
+Example: `feature/admin-billing-ui` as base, sub-branches:
+- `feature/admin-billing-ui-scaffold`
+- `feature/admin-billing-ui-data`
+- `feature/admin-billing-ui-components`
 
 ## Agent Responsibilities
 
@@ -77,28 +84,28 @@ All code is written in the -local worktree. PR worktrees only receive shipped fi
 
 | File | PR Branch | Shared | Shipped |
 |------|-----------|--------|---------|
-| src/types/Schema.ts | {branch}/shared-types | no | no |
-| src/controllers/List.cs | {branch}/list-controller | no | no |
-| src/types/Schema.ts | {branch}/list-controller | yes | no |
+| src/types/Schema.ts | {branch}-shared-types | no | no |
+| src/controllers/List.cs | {branch}-list-controller | no | no |
+| src/types/Schema.ts | {branch}-list-controller | yes | no |
 
 ## Ship Order
 
 ### Ship 1: Foundation
-Target: {branch}/shared-types
+Target: {branch}-shared-types
 Dependencies: none
 Files: {list}
 
 ### Ship 2: Parallel (after foundation merged on origin)
-Target: {branch}/list-controller
+Target: {branch}-list-controller
 Dependencies: shared-types merged on origin
 Files: {list}
 
-Target: {branch}/detail-dialog
+Target: {branch}-detail-dialog
 Dependencies: shared-types merged on origin
 Files: {list}
 
 ### Ship 3: Integration (after all parallel merged on origin)
-Target: {branch}/integration
+Target: {branch}-integration
 Dependencies: all parallel PRs merged on origin
 Files: {list}
 

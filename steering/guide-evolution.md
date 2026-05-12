@@ -57,6 +57,88 @@ Knowledge files carry sync frontmatter (`draft`/`published`/`modified`). Guide f
 - `sessionStatus`: `active` | `completed` | `abandoned`
 - Set to `completed` at end of session, `active` during
 
+## Auto-Learning (Implementation Agents Only)
+
+Implementation agents may capture preferences automatically WITHOUT user approval.
+
+### Which Agents Auto-Learn
+
+| Agent | Auto-learn | Reason |
+|-------|-----------|--------|
+| @frontend | Yes | Style, conventions, component patterns |
+| @backend | Yes | Code conventions, naming, structure |
+| @designer | Yes | Visual preferences, layout choices |
+| @github-agent | Yes | PR format, commit style, branch naming |
+| @protobuf-engineer | Partial | Naming conventions only |
+| @architect | NO | Decisions compound downstream |
+| @dark-architect | NO | Must stay adversarial |
+| @skill-auditor | NO | Must not soften |
+| @quality-assurance | NO | Must not soften |
+| @taskmaster | Partial | Granularity preferences only |
+
+### 2-Occurrence Rule
+
+Do NOT capture on first occurrence. Only capture when the same preference appears 2+ times across different tasks or sessions. First time = data point. Second time = pattern. Pattern = capture.
+
+### Exclusion Phrases (Never Capture)
+
+If the user says any of these, do NOT auto-learn — it's a one-off:
+- "for now", "temporarily", "just this once", "quick hack"
+- "just do it", "skip it this time", "I'll fix later"
+- "in this case", "exception here", "only for this"
+
+### Scope Tagging
+
+Every auto-learned entry must have a scope:
+- `project:[name]` — only applies to a specific project
+- `filetype:[ext]` — only applies when working with certain files
+- `always` — applies everywhere (use sparingly)
+
+### Where It Goes
+
+All auto-captures append to `/knowledge/auto-learned.md` (the quarantine file).
+- Entries are provisional — they influence behavior but are clearly marked
+- During synthesis runs: review, promote good ones to guides, delete bad ones
+- Entries older than 90 days without promotion are candidates for deletion
+
+### What Gets Captured
+
+- Naming preferences ("I prefer X over Y")
+- Style choices ("use single quotes", "no semicolons")
+- Component patterns ("always extract hooks into separate files")
+- Formatting preferences ("keep imports sorted by type")
+- Tool preferences ("use bun not npm")
+
+### What Never Gets Captured (Even With 2+ Occurrences)
+
+- Architecture decisions (which DB, which framework, which pattern)
+- Security choices (auth approach, encryption, access control)
+- Workflow preferences (these go through normal guide-evolution)
+- Anything that changes system behavior (not just code style)
+
+## Diagnosis Framework (When Corrected)
+
+When the user corrects your approach, your NEXT response must include this block before continuing:
+
+```
+### Correction Acknowledged
+**What was wrong:** [specific thing]
+**Category:** [skill gap | convention gap | workflow gap | guide staleness | design gap]
+**Fix for now:** [what you're doing differently right now]
+**Permanent fix:** [proposed guide/skill change] or "None needed - one-off mistake"
+```
+
+Categories:
+| Category | Signal | Remedy |
+|----------|--------|--------|
+| Skill gap | AI guessed at an API, hallucinated a pattern | New skill doc |
+| Convention gap | User says "we always do X" but it's not written | Add to relevant guide |
+| Workflow gap | Steps happened in wrong order, handoff was missed | Edit adaptive-workflow.md or planning-design.md |
+| Guide staleness | Guide says X but codebase has moved to Y | Update guide, set lastVerified |
+| Design gap | Implementation revealed the design was incomplete | Feed back to @architect patterns |
+
+This block is NOT optional after a correction. If you catch yourself responding without it, add it before continuing.
+
 ## How to Propose
 
 1. Finish the current task first — never interrupt work to update guides
